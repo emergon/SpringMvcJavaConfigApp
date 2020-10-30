@@ -13,5 +13,11 @@
     </head>
     <body>
         <h1>Hello World, This is Home Page</h1>
+        
+        <ul>
+            <li>
+                <a href="${pageContext.request.contextPath}/customer">Customers</a>
+            </li>
+        </ul>
     </body>
 </html>
