@@ -33,8 +33,8 @@
                         <tr>
                             <td>${cu.ccode}</td>
                             <td>${cu.cname}</td>
-                            <td class="buttontd"><a class="btn" href="customer/editCustomer?id=${cu.ccode}">Edit</a></td>
-                            <td class="buttontd"><a class="btn" href="customer/deleteCustomer?id=${cu.ccode}">Delete</a></td>
+                            <td class="buttontd"><a class="btn" href="customer/edit?onoma=${cu.cname}">Edit</a></td>
+                            <td class="buttontd"><a class="btn" href="customer/delete?id=${cu.ccode}">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

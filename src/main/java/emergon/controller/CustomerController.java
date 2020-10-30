@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -37,6 +38,20 @@ public class CustomerController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createCustomer(@ModelAttribute("customer") Customer customer){
         service.create(customer);
+        return "redirect:/customer";
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public ModelAndView showCustomerUpdateForm(@RequestParam("onoma")String name, ModelAndView model){
+        Customer c = service.findByName(name);
+        model.setViewName("customer/edit");//  WEB-INF/view/customer/update.jsp
+        model.addObject("customer", c);
+        return model;
+    }
+    
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editCustomer(@ModelAttribute("customer") Customer customer){
+        service.edit(customer);
         return "redirect:/customer";
     }
 }
