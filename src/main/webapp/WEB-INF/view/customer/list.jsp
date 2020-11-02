@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="styling/styling.css" />
     </head>
     <body>
-        <%--<jsp:include page="../header.jsp"/>--%>
+        <jsp:include page="../header.jsp"/>
         <section class="container">
             <h2>List Of Customers</h2>
             <div class="btn-area">

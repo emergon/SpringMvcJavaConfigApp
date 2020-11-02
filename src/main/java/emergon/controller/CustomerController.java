@@ -20,6 +20,10 @@ public class CustomerController {
     @Autowired//Dependency Injection
     private CustomerService service;
     
+    public void hello(){
+        System.out.println("hello");
+    }
+    
     @RequestMapping
     public String showCustomers(Model model){
         List<Customer> customers = service.findAll();
@@ -53,5 +57,11 @@ public class CustomerController {
     public String editCustomer(@ModelAttribute("customer") Customer customer){
         service.edit(customer);
         return "redirect:/customer";
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteCustomer(@RequestParam("id") int ccode){
+        service.delete(ccode);
+        return "forward:/customer";
     }
 }

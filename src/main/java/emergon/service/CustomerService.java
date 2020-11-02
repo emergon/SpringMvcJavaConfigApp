@@ -42,4 +42,16 @@ public class CustomerService {
             }
         }
     }
+
+    public void delete(int id) {
+        Customer customerToDelete = null;
+        for(Customer c: customers){//Is this correct
+            if(c.getCcode()==id){
+                customerToDelete = c;
+            }
+        }
+        if(customerToDelete!=null){
+            customers.remove(customerToDelete);
+        }
+    }
 }
