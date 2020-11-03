@@ -1,6 +1,17 @@
 package emergon.entity;
 
-public class Customer {
+import java.io.Serializable;
+import javax.persistence.Entity;//JPA specification
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "customer")
+public class Customer implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ccode;
     private String cname;
 

@@ -3,9 +3,11 @@ package emergon.controller;
 import emergon.entity.User;
 import emergon.service.AuthenticationService;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,10 +48,15 @@ public class AuthenticationController {
      * @ModelAttribute will be used to read Object User from the Model (submitted in the form)
      * @param user
      * @param model
+     * @param result must be after @Valid Object
      * @return 
      */
     @PostMapping("/login")
-    public String checkLogin(@ModelAttribute("xrhsths") User user, Model model){
+    public String checkLogin(@ModelAttribute("xrhsths") @Valid User user, BindingResult result, Model model){
+        if(result.hasErrors()){
+            System.out.println("errors:"+result);
+            return "login";
+        }
         //check if username/password are correct
         boolean userExists = service.isUserCorrect(user);
         if(userExists){//if correct, send user to the next page

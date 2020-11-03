@@ -19,8 +19,13 @@
                    method="POST" 
                    modelAttribute="xrhsths">
             Username: <form:input path="username"/>
+            <form:errors path="username"/>
             <br/>
             Password: <form:password path="password"/>
+            <form:errors path="password" cssStyle="color:red"/>
+            <br/>
+            DOB:<input type="date" name="dob"/>
+            <form:errors path="dob"/>
             <br/>
             <input type="submit" value="Login"/>
         </form:form>

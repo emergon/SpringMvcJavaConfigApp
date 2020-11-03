@@ -1,24 +1,24 @@
 package emergon.service;
 
+import emergon.dao.CustomerDao;
 import emergon.entity.Customer;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class CustomerService {
 
+    @Autowired
+    private CustomerDao cdao;
+    
     private List<Customer> customers = new ArrayList();
 
     public List<Customer> findAll() {
-        //customers = new ArrayList();
-        if (customers.isEmpty()) {
-            customers.add(new Customer(1, "Jack"));
-            customers.add(new Customer(2, "Peter"));
-            customers.add(new Customer(3, "Mary"));
-            customers.add(new Customer(4, "Andrew"));
-        }
-        return customers;
+        return cdao.findAll();
     }
 
     public void create(Customer customer) {
