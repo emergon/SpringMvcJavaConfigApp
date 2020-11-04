@@ -21,8 +21,9 @@ public class CustomerService {
         return cdao.findAll();
     }
 
-    public void create(Customer customer) {
-        customers.add(customer);
+    public int create(Customer customer) {
+        int id = (Integer)cdao.addCustomer(customer);
+        return id;
     }
 
     public Customer findByName(String name) {
@@ -43,15 +44,7 @@ public class CustomerService {
         }
     }
 
-    public void delete(int id) {
-        Customer customerToDelete = null;
-        for(Customer c: customers){//Is this correct
-            if(c.getCcode()==id){
-                customerToDelete = c;
-            }
-        }
-        if(customerToDelete!=null){
-            customers.remove(customerToDelete);
-        }
+    public String delete(int id) {
+        return cdao.removeCustomer(id);
     }
 }

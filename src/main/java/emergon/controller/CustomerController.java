@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/customer")
@@ -40,8 +41,10 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createCustomer(@ModelAttribute("customer") Customer customer){
-        service.create(customer);
+    public String createCustomer(@ModelAttribute("customer") Customer customer, RedirectAttributes ra){
+        int id = service.create(customer);
+        String minima = "Customer successfully created with id:"+id;
+        ra.addFlashAttribute("customerMessage", minima);
         return "redirect:/customer";
     }
     
@@ -60,8 +63,9 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String deleteCustomer(@RequestParam("id") int ccode){
-        service.delete(ccode);
-        return "forward:/customer";
+    public String deleteCustomer(@RequestParam("id") int ccode, RedirectAttributes ra){
+        String minima = service.delete(ccode);
+        ra.addFlashAttribute("customerMessage", minima);
+        return "redirect:/customer";
     }
 }

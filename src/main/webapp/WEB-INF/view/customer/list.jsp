@@ -20,6 +20,9 @@
             <div class="btn-area">
                 <a  class="btn" href="${pageContext.request.contextPath}/customer/create">Create A New Customer</a> 
             </div>
+            <p>
+                ${customerMessage}
+            </p>
             <table class="table">
                 <thead>
                     <tr>
