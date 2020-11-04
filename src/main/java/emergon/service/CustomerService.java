@@ -15,8 +15,6 @@ public class CustomerService {
     @Autowired
     private CustomerDao cdao;
     
-    private List<Customer> customers = new ArrayList();
-
     public List<Customer> findAll() {
         return cdao.findAll();
     }
@@ -26,25 +24,16 @@ public class CustomerService {
         return id;
     }
 
-    public Customer findByName(String name) {
-        Customer customer = null;
-        for(Customer c: customers){
-            if(c.getCname().equals(name)){
-                customer = c;
-            }
-        }
-        return customer;
-    }
-
     public void edit(Customer customer) {
-        for(Customer c: customers){
-            if(c.getCcode()==customer.getCcode()){
-                c.setCname(customer.getCname());
-            }
-        }
+        cdao.updateCustomer(customer);
     }
 
     public String delete(int id) {
         return cdao.removeCustomer(id);
+    }
+
+    public Customer findById(int id) {
+        Customer customer = cdao.findById(id);
+        return customer;
     }
 }

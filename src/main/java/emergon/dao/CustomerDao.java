@@ -49,5 +49,20 @@ public class CustomerDao {
         return message;
     }
     
+    public void updateCustomer(Customer customer){
+        Session session = getSession();
+        session.saveOrUpdate(customer);
+        System.out.println("Customer updated ----------------------------");
+    }
+
+    public Customer findById(int id) {
+        Session session = getSession();
+        String queryString = "SELECT c FROM Customer c WHERE c.ccode = :id";
+        Query q = session.createQuery(queryString, Customer.class);
+        q.setParameter("id", id);
+        Customer c = (Customer)q.getSingleResult();
+        return c;
+    }
+    
     
 }

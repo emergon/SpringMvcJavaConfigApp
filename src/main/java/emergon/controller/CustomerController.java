@@ -49,8 +49,8 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView showCustomerUpdateForm(@RequestParam("onoma")String name, ModelAndView model){
-        Customer c = service.findByName(name);
+    public ModelAndView showCustomerUpdateForm(@RequestParam("kwdikos")int id, ModelAndView model){
+        Customer c = service.findById(id);
         model.setViewName("customer/edit");//  WEB-INF/view/customer/update.jsp
         model.addObject("customer", c);
         return model;
