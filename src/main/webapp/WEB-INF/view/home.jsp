@@ -18,6 +18,9 @@
             <li>
                 <a href="${pageContext.request.contextPath}/customer">Customers</a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/product">Products</a>
+            </li>
         </ul>
     </body>
 </html>
