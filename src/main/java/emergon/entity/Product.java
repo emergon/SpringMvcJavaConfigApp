@@ -16,7 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -41,12 +43,14 @@ public class Product implements Serializable {
     @Column(name = "pcode")
     private Integer pcode;
     @Basic(optional = false)
+    @NotEmpty(message = "{NotEmpty.product.pdescr}")
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "pdescr")
     private String pdescr;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "pprice")
+    @Positive(message = "{Positive.product.pprice}")
     private BigDecimal pprice;
 
     public Product() {
