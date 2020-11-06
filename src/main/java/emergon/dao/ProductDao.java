@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ProductDao extends SuperDao<Product> {
 
+    @Override
     public List<Product> findAll(){
         return super.findAll("Product.findAll");
     }

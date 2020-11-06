@@ -21,6 +21,9 @@
             <li>
                 <a href="${pageContext.request.contextPath}/product">Products</a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/salesman">Salesmen</a>
+            </li>
         </ul>
     </body>
 </html>

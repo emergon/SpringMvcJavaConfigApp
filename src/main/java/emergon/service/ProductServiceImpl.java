@@ -18,23 +18,28 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private CrudInterfaceDao<Product> pdao;
     
+    @Override
     public List<Product> findAll() {
         return pdao.findAll();
     }
     
+    @Override
     public int create(Product product) {
         int id = (Integer)pdao.add(product);
         return id;
     }
     
+    @Override
     public void edit(Product product) {
         pdao.update(product);
     }
 
+    @Override
     public String delete(int id) {
         return pdao.remove(id);
     }
 
+    @Override
     public Product findById(int id) {
         Product product = pdao.findById(id);
         return product;

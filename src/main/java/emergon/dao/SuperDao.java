@@ -1,8 +1,9 @@
 package emergon.dao;
 
-import emergon.entity.Product;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
+import javax.persistence.Id;
 import javax.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,5 +60,7 @@ public abstract class SuperDao<E> implements CrudInterfaceDao<E>{
         }
         return message;
     }
+    
+    
 
 }

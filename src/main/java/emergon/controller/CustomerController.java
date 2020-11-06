@@ -3,15 +3,19 @@ package emergon.controller;
 
 import emergon.entity.Customer;
 import emergon.service.CustomerService;
-import emergon.service.CustomerServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +36,19 @@ public class CustomerController {
         model.addAttribute("customers", customers);
         model.addAttribute("message", "These are the customers in the model");
         return "customer/list";
+    }
+    
+    @GetMapping("/list")
+    @ResponseBody
+    public List<Customer> getCustomersInJson(){
+        return service.findAll();
+    }
+    
+    @PostMapping("/rest/create")
+    @ResponseBody
+    public ResponseEntity save(@RequestBody Customer customer){
+        int id = service.create(customer);
+        return ResponseEntity.ok().body("Customer was successfully created with id:"+id);
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
