@@ -21,7 +21,4 @@ public class ProductDao extends SuperDao<Product> {
         return super.findById(id, "Product.findById");
     }
     
-    public List<Product> findProductLessThan(double number){
-        return null;
-    }
 }

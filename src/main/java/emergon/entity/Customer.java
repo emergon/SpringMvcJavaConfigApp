@@ -5,10 +5,17 @@ import javax.persistence.Entity;//JPA specification
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries(value = {
+    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
+    @NamedQuery(name = "Customer.deleteById", query = "Delete from Customer c where c.ccode = :id"),
+    @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.ccode = :id")
+})
 public class Customer implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CrudInterfaceDao<E> {
     
-    List<E> findAll(String namedQuery);
+    List<E> findAll();
     Serializable add(E e);
     String remove(int kwdikos);
     void update(E e);

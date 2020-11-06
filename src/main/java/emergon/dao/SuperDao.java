@@ -18,7 +18,6 @@ public abstract class SuperDao<E> implements CrudInterfaceDao<E>{
         return sessionFactory.getCurrentSession();
     }
     
-    @Override
     public List<E> findAll(String namedQuery) {
         Query query = getSession().createNamedQuery(namedQuery);
         List<E> items = query.getResultList();
