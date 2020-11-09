@@ -5,12 +5,16 @@ import emergon.entity.Customer;
 import emergon.service.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,17 +42,44 @@ public class CustomerController {
         return "customer/list";
     }
     
-    @GetMapping("/list")
+    @GetMapping("/rest/customers")
     @ResponseBody
     public List<Customer> getCustomersInJson(){
         return service.findAll();
     }
     
-    @PostMapping("/rest/create")
+    @PostMapping("/rest/customers")
     @ResponseBody
     public ResponseEntity save(@RequestBody Customer customer){
         int id = service.create(customer);
         return ResponseEntity.ok().body("Customer was successfully created with id:"+id);
+    }
+    
+    @GetMapping("/rest/customers/{kwdikos}")
+    @ResponseBody
+    public ResponseEntity getCustomerById(@PathVariable("kwdikos") int kwdikos){
+        Customer customer = service.findById(kwdikos);
+        if(customer != null){
+            return ResponseEntity.ok().body(customer);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer with id:"+kwdikos+" doesn't exist!!!");
+        }
+    }
+    
+    @DeleteMapping(value = "/rest/customers/{kwdikos}")
+    @ResponseBody
+    public ResponseEntity delete(@PathVariable("kwdikos") int ccode){
+        String minima = service.delete(ccode);
+        return ResponseEntity.ok().body(minima);
+    }
+    
+    @PutMapping(value = "/rest/customers/{kwdikos}")
+    @ResponseBody
+    public ResponseEntity edit(@PathVariable("kwdikos") int ccode, @RequestBody Customer updatedCustomer){
+        Customer oldCustomer = service.findById(ccode);
+        oldCustomer.setCname(updatedCustomer.getCname());
+        service.edit(oldCustomer);
+        return ResponseEntity.ok().body("Customer updated successfully!!!!");
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.GET)
